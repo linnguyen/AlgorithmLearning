@@ -1,0 +1,49 @@
+package test;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+public class Saturday {
+	public static int tong_cac_so_2_easy1(int[] nums) {
+
+		Set<Integer> sums = new HashSet<>();
+		sums.add(0); // Thêm tổng 0 vào mảng sums để đánh dấu mảng con rỗng
+		for (int num : nums) {
+			Set<Integer> newSums = new HashSet<>();
+			for (int sum : sums) {
+				newSums.add(sum + num); // Tạo các tổng mới bằng cách thêm số nguyên num vào các tổng cũ
+			}
+			sums.addAll(newSums); // Thêm các tổng mới vào mảng sums
+		}
+		return sums.size() - 1; // Tr
+
+	}
+
+	public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        List<Integer> subset = new ArrayList<>();
+        backtrack(result, subset, nums, 0);
+        return result;
+    }
+
+    private void backtrack(List<List<Integer>> result, List<Integer> subset, int[] nums, int start) {
+        result.add(new ArrayList<>(subset)); // Thêm subset hiện tại vào kết quả
+        for (int i = start; i < nums.length; i++) {
+            subset.add(nums[i]); // Thêm phần tử nums[i] vào subset
+            backtrack(result, subset, nums, i + 1); // Đệ quy tìm các subset con từ phần tử nums[i+1] trở đi
+            subset.remove(subset.size() - 1); // Loại bỏ phần tử nums[i] để tiếp tục tìm các subset con khác
+        }
+    }
+
+	
+	public static void main(String[] args) {
+
+		int[] nums = { 1, 2, 3 };
+		int result = tong_cac_so_2_easy2(nums);
+		System.out.println("So luong la " + result);
+	}
+
+
+}

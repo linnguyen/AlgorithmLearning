@@ -1,0 +1,26 @@
+package test;
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class Saturday {
+	public static void main(String[] args) {
+		System.out.print(false);
+	}
+
+	public static int tong_cac_so_2_easy(int[] nums) {
+		
+		Set<Integer> sums = new HashSet<>();
+        sums.add(0); // Thêm tổng 0 vào mảng sums để đánh dấu mảng con rỗng
+        for (int num : nums) {
+            Set<Integer> newSums = new HashSet<>();
+            for (int sum : sums) {
+                newSums.add(sum + num); // Tạo các tổng mới bằng cách thêm số nguyên num vào các tổng cũ
+            }
+            sums.addAll(newSums); // Thêm các tổng mới vào mảng sums
+        }
+        return sums.size() - 1; // Tr
+
+	}
+
+}

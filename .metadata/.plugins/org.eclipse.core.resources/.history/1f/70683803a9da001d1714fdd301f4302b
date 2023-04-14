@@ -1,0 +1,57 @@
+package test;
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class Saturday {
+	public static void main(String[] args) {
+
+		int[] nums = { 1, 4, 3 };
+		int result = tong_cac_so_2_easy2(nums);
+		System.out.println("So luong la " + result);
+	}
+
+	public static int tong_cac_so_2_easy1(int[] nums) {
+
+		Set<Integer> sums = new HashSet<>();
+		sums.add(0); // Thêm tổng 0 vào mảng sums để đánh dấu mảng con rỗng
+		for (int num : nums) {
+			Set<Integer> newSums = new HashSet<>();
+			for (int sum : sums) {
+				newSums.add(sum + num); // Tạo các tổng mới bằng cách thêm số nguyên num vào các tổng cũ
+			}
+			sums.addAll(newSums); // Thêm các tổng mới vào mảng sums
+		}
+		return sums.size() - 1; // Tr
+
+	}
+
+	    private static Set<Set<Integer>> sums = new HashSet<>();
+	    private static int count = 0;
+
+	    public static int tong_cac_so_2_easy2(int[] nums) {
+	        sums.clear();
+	        count = 0;
+	        for (int i = 0; i < nums.length; i++) {
+	            backtrack(i, nums[i], 0, new HashSet<>(), nums);
+	        }
+	        return count;
+	    }
+
+	    private static void backtrack(int start, int target, int currSum, Set<Integer> currSet, int[] nums) {
+	        if (currSum == target) {
+	            if (!sums.contains(currSet)) { // Kiểm tra xem tổng này đã tồn tại hay chưa
+	                sums.add(new HashSet<>(currSet)); // Thêm tổng này vào mảng các tổng
+	                count++;
+	            }
+	        } else if (currSum < target) {
+	            for (int i = start; i < nums.length; i++) {
+	                currSet.add(nums[i]);
+	                backtrack(i + 1, target, currSum + nums[i], currSet, nums);
+	                currSet.remove(nums[i]);
+	            }
+	        }
+	    }
+
+}
+

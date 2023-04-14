@@ -1,0 +1,14 @@
+package test;
+
+public class Saturday {
+	public static void main(String[] args) {
+		System.out.print(false);
+	}
+	
+public static int tong_cac_so_2_easy(int[] nums) {
+	    
+	    
+
+	}
+}
+}
